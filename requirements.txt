@@ -1,0 +1,5 @@
+Django==5.2.6
+djangorestframework==3.16.1
+celery[redis]==5.4.0
+redis==5.2.1
+requests==2.32.5
