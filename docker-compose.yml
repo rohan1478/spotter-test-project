@@ -8,11 +8,10 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+    env_file:
+      - .env
     environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN:-}
-      - FUEL_PRICES_CSV_PATH=/app/data/fuel-prices-for-be-assessment.csv
+      - DJANGO_SETTINGS_MODULE=config.settings
     depends_on:
       - redis
 
@@ -21,11 +20,10 @@ services:
     command: celery -A config worker -l info
     volumes:
       - .:/app
+    env_file:
+      - .env
     environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN:-}
-      - FUEL_PRICES_CSV_PATH=/app/data/fuel-prices-for-be-assessment.csv
+      - DJANGO_SETTINGS_MODULE=config.settings
     depends_on:
       - redis
 
